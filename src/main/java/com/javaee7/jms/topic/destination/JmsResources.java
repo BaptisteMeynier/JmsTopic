@@ -24,6 +24,6 @@ import javax.jms.JMSDestinationDefinitions;
 public class JmsResources {
 	 public static final String SUBSCRIPTION = "shop"; 
 	public static final String CONNECTION_FACTORY = "java:app/factory";
-	public static final String FRUIT_TOPIC = "java:global/jms/fruitTopic";
-	public static final String VEGETABLE_TOPIC = "java:global/jms/vegetableTopic";
+	public static final String FRUIT_TOPIC = "java:global/jms/topic/fruitTopic";
+	public static final String VEGETABLE_TOPIC = "java:global/jms/topic/vegetableTopic";
 }
