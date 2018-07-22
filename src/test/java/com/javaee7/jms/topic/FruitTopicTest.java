@@ -28,7 +28,7 @@ import com.javaee7.jms.topic.destination.JmsResources;
  *
  */
 @RunWith(Arquillian.class)
-@ServerSetup(PlayCli.class)
+@ServerSetup(FruitTopicTest.InitStandalone.class)
 public class FruitTopicTest {
 
 	@Inject
@@ -40,17 +40,17 @@ public class FruitTopicTest {
 				.addClasses(FruitPublisher.class,
 						FruitSubscription.class,
 						JmsResources.class)
+				.addAsResource("hornetq-configuration.xml", "hornetq-configuration.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");  
 				
 	}
 	
 	static class InitStandalone extends PlayCli  {
-
 		@Override
 		public void setup(ManagementClient arg0, String arg1) throws Exception {
 			List<String> cliCommands= Stream.of(
 					"/subsystem=messaging/hornetq-server=default/security-setting=\"jms.topic.fruitTopic\":add",
-					"/subsystem=messaging/hornetq-server=default/security-setting=\"jms.topic.fruitTopic\"/role=swuser:add(send=true, consume=true)"
+					"/subsystem=messaging/hornetq-server=default/security-setting=\"jms.topic.fruitTopic\"/role=awfuser:add(send=true, consume=true)"
 					).collect(Collectors.toList());
 			run(arg0,cliCommands);
 		}

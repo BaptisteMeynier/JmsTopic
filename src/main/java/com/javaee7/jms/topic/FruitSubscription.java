@@ -27,6 +27,7 @@ public class FruitSubscription {
 	 */
 	@PostConstruct
 	void createSubscription() {
+		
 		try (JMSContext jms = factory.createContext()) { // <1> This is factory with clientId specified
 			JMSConsumer consumer = jms.createDurableConsumer(topic, JmsResources.SUBSCRIPTION); // <2> creates durable subscription on the topic
 			System.out.println("MESSAGE>>>"+consumer.receive());
