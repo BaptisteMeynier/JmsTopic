@@ -24,7 +24,7 @@ public abstract class PlayCli implements ServerSetupTask {
 		final String host = managementClient.getWebUri().getHost();
 		final List<String> removeCli = 
 				cliCommands.stream()
-				.map(cli->cli.replace("\\:.*", ""))
+				.map(cli->cli.substring(0, cli.lastIndexOf(":")))
 				.map(cli->{return cli+":remove";})
 				.collect(Collectors.toList());
 		processCli(host, removeCli);
